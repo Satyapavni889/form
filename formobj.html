@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myform">
+        <label for="userip">Key</label><br>
+        <input type="text" id="userip" name="userip"><br>
+
+        <label for="password">value</label><br>
+        <input type="text" id="password" name="password"><br><br>
+
+        <button>submit</button>
+    </form>
+    <script>
+        let getform=document.getElementById("myform");
+        getform.addEventListener("submit",(e)=>{
+            e.preventDefault()
+            let x=localStorage.getItem("userenter");
+            let users=x?JSON.parse(x):[]
+
+            let ip1=document.getElementById("userip").value; 
+            let ip2=document.getElementById("password").value;
+            let userenter={"name":ip1,"password":ip2};
+            let count=0
+            for(i of users){
+                if(i.name==ip1){
+                    alert("user already exists")
+                    count++;
+                    break;
+                }
+            }
+            if(count==0){
+                users.push(userenter);
+                localStorage.setItem("userenter",JSON.stringify(users));
+            }
+        })
+    </script>
+
+</body>
+</html>
